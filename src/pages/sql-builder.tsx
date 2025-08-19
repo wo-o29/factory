@@ -4,6 +4,7 @@ import { TECH_NAME_TO_ID } from "../tech";
 
 // 상수 정의
 const CATEGORY_ID = { fe: 1, be: 2, android: 3, ios: 4, ss: 5, etc: 6 };
+const CATEGORY_KEY = Object.keys(CATEGORY_ID);
 
 const FIELDS = [
   "title",
@@ -181,12 +182,12 @@ export default function SqlBuilder() {
     if (article.content.length < 100 || article.content.length > 8000) {
       errors.content = "100~8000자 필요";
     }
-    if (article.articleUrl.length < 1 || article.articleUrl.length > 255) {
-      errors.articleUrl = "필수, 1~255자";
+    if (article.articleUrl.length < 1 || article.articleUrl.length >= 500) {
+      errors.articleUrl = "필수, 1~500자 이하";
     }
     if (categoryNames.length !== 1) {
       errors.category = "category는 반드시 1개 입력";
-    } else if (!["trouble", "tech", "etc"].includes(categoryNames[0])) {
+    } else if (!CATEGORY_KEY.includes(categoryNames[0])) {
       errors.category = "유효한 카테고리 필요";
     }
     if (categoryKey === "etc" && techIds.length !== 0) {
@@ -284,11 +285,11 @@ export default function SqlBuilder() {
 
       const jsonData = await response.json();
       const newArticle = createNewArticle(url, jsonData);
-      setArticles((prev) => [...prev, newArticle]);
+      setArticles((prev) => [newArticle, ...prev]);
     } catch (error) {
       alert("크롤링 실패: " + error);
-      const newArticle = createNewArticle(url);
-      setArticles((prev) => [...prev, newArticle]);
+      // const newArticle = createNewArticle(url);
+      // setArticles((prev) => [newArticle, ...prev]);
     } finally {
       setLoading(false); // 로딩 종료
     }
@@ -324,6 +325,7 @@ export default function SqlBuilder() {
       errors: validateArticle(article),
     }));
   }, [articles, projectGithubUrl]);
+  console.log(articlesWithSQL);
 
   return (
     <>
@@ -488,6 +490,7 @@ function ArticleBlock({
   onToggle,
   getHighlightHTML,
 }: ArticleBlockProps) {
+  // console.log(article.errors["category"]);
   return (
     <div className="article-block">
       {/* 폼 그리드 */}
