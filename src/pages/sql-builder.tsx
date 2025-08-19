@@ -248,14 +248,16 @@ export default function SqlBuilder() {
   };
 
   // 드래그앤드롭 핸들러
-  const handleDrop = async (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent, inputUrl: string = "") => {
     e.preventDefault();
     setDragOver(false);
     setLoading(true); // 로딩 시작
 
     const url =
-      e.dataTransfer.getData("text/uri-list") ||
-      e.dataTransfer.getData("text/plain");
+      (e.dataTransfer?.getData("text/uri-list") ||
+        e.dataTransfer?.getData("text/plain")) ??
+      inputUrl;
+
     if (!url) {
       setLoading(false);
       return;
@@ -354,6 +356,10 @@ export default function SqlBuilder() {
           }}
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
+          onClick={(e) => {
+            const url = prompt("URL을 붙여넣으세요 (취소하면 초기화됩니다):");
+            handleDrop(e, url);
+          }}
         >
           {loading ? (
             <>
