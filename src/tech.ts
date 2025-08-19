@@ -92,13 +92,11 @@ const TECH_ID = {
   92: "gradle",
   93: "jwt",
   94: "cloudfront",
-  95: "logback",
   96: "ical4j",
   97: "prettier",
   98: "jmeter",
   99: "jackson",
   // 추가된 안드로이드 관련 기술스택
-  100: "mvvm",
   101: "retrofit",
   102: "okhttp",
   103: "moshi",
@@ -126,6 +124,8 @@ const TECH_ID = {
   125: "turbine",
   126: "zxing",
   127: "websocket",
+  128: "rabbitmq",
+  129: "k6",
 };
 
 export const TECH_NAME_TO_ID = Object.fromEntries(
