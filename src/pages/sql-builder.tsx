@@ -1,76 +1,9 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
+import { TECH_NAME_TO_ID } from "./tech";
 
 // 상수 정의
 const CATEGORY_ID = { trouble: 1, tech: 2, etc: 3 };
-const TECH_ID = {
-  1: "react",
-  2: "nextjs",
-  3: "vuejs",
-  4: "elasticSearch",
-  5: "angular",
-  6: "svelte",
-  7: "jquery",
-  8: "typescript",
-  9: "javascript",
-  10: "tailwind",
-  11: "jotai",
-  12: "tanstackQuery",
-  13: "reactNative",
-  14: "zustand",
-  15: "styledComponents",
-  16: "emotion",
-  17: "recoil",
-  18: "redux",
-  19: "nuxtjs",
-  20: "nodejs",
-  21: "express",
-  22: "nestjs",
-  23: "django",
-  24: "fastapi",
-  25: "spring",
-  26: "springboot",
-  27: "rubyonrails",
-  28: "supabase",
-  29: "aws",
-  30: "mongodb",
-  31: "postgresql",
-  32: "mysql",
-  33: "redis",
-  34: "kafka",
-  35: "docker",
-  36: "kubernetes",
-  37: "java",
-  38: "python",
-  39: "c",
-  40: "cpp",
-  41: "kotlin",
-  42: "swift",
-  43: "flutter",
-  44: "vite",
-  45: "astro",
-  46: "solidjs",
-  47: "remix",
-  48: "prisma",
-  49: "trpc",
-  50: "go",
-  51: "rust",
-  52: "deno",
-  53: "compose",
-  54: "rxswift",
-  55: "alamofire",
-  56: "swiftui",
-  57: "githubAction",
-  58: "git",
-  59: "grafana",
-  60: "jpa",
-  61: "jenkins",
-  62: "querydsl",
-};
-
-const TECH_NAME_TO_ID = Object.fromEntries(
-  Object.entries(TECH_ID).map(([id, name]) => [name.toLowerCase(), Number(id)])
-);
 
 const FIELDS = [
   "title",
