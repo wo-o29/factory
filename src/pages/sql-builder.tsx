@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
-import { TECH_NAME_TO_ID } from "./tech";
+import { TECH_NAME_TO_ID } from "../tech";
 
 // 상수 정의
 const CATEGORY_ID = { trouble: 1, tech: 2, etc: 3 };
@@ -261,10 +261,22 @@ export default function SqlBuilder() {
       return;
     }
 
+    const mappingApi = (url: string) => {
+      if (url.includes("notion.site")) {
+        return "crawl-notion";
+      }
+
+      if (url.includes("github.com") && url.includes("wiki")) {
+        return "crawl-github-wiki";
+      }
+
+      return "crawl";
+    };
+
     try {
-      const api = url.includes("notion.site") ? "crawl-notion" : "crawl";
+      const apiUrl = mappingApi(url);
       const response = await fetch(
-        `/api/${api}?url=${encodeURIComponent(url)}`
+        `/api/${apiUrl}?url=${encodeURIComponent(url)}`
       );
       if (!response.ok) throw new Error("크롤링 실패");
 

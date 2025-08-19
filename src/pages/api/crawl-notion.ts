@@ -87,9 +87,8 @@ export default async function handler(req, res) {
     // API 응답
     return res.status(200).json({
       title: textContent.title,
-      summary: textContent.blockTexts[0] || "",
-      content: textContent.mainContent, // 전체 본문
-      sliceContent: textContent.mainContent.substring(0, 2000), // 처음 2000자
+      summary: textContent.mainContent.substring(0, 200), // 처음 200자
+      content: textContent.mainContent.substring(0, 2000), // 처음 2000자
       debug: {
         totalBlocks: textContent.totalBlocks,
         contentBlocks: textContent.contentBlocks,

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import Head from "next/head";
-import { TECH_NAME_TO_ID } from "./tech";
+import { TECH_NAME_TO_ID } from "@/tech";
 
 // 상수 정의
 const CATEGORY_ID = {
@@ -319,12 +319,16 @@ export default function ProjectSqlBuilder() {
         {/* INSERT문 패널 */}
         <div className="panel">
           <h3>📦 통합 INSERT문</h3>
-          <pre className="sql-combined">{buildSQL.combinedSQL}</pre>
+          <pre className="sql-combined" suppressHydrationWarning>
+            {buildSQL.combinedSQL}
+          </pre>
 
           <div className="cols">
             <div>
               <h3>🔧 project INSERT</h3>
-              <pre className="sql-part">{buildSQL.projectSQL}</pre>
+              <pre className="sql-part" suppressHydrationWarning>
+                {buildSQL.projectSQL}
+              </pre>
             </div>
             <div>
               <h3>🧩 project_tech_stacks INSERT</h3>
@@ -401,7 +405,6 @@ export default function ProjectSqlBuilder() {
             </div>
           ))}
         </div>
-
         <style jsx>{`
           .container {
             font-family: system-ui, -apple-system, Segoe UI, Roboto,
