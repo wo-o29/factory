@@ -332,43 +332,52 @@ export default function SqlBuilder() {
       </Head>
 
       <div className="container">
-        {/* Project GitHub URL 입력 */}
-        <div className="project-url-section">
-          <label>Project GitHub URL</label>
-          <input
-            type="text"
-            value={projectGithubUrl}
-            onChange={(e) => setProjectGithubUrl(e.target.value)}
-            placeholder="예: https://github.com/user/repo"
-            className="project-url-input"
-          />
-        </div>
-
-        {/* 드롭박스 */}
         <div
-          ref={dropboxRef}
-          className={`dropbox ${dragOver ? "dragover" : ""} ${
-            loading ? "loading" : ""
-          }`}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragOver(true);
-          }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={handleDrop}
-          onClick={(e) => {
-            const url = prompt("URL을 붙여넣으세요 (취소하면 초기화됩니다):");
-            handleDrop(e, url);
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            background: "white",
+            padding: "16px",
           }}
         >
-          {loading ? (
-            <>
-              <div className="spinner" />
-              <div>크롤링 중...</div>
-            </>
-          ) : (
-            "URL을 여기에 드래그하세요"
-          )}
+          {/* Project GitHub URL 입력 */}
+          <div className="project-url-section">
+            <label>Project GitHub URL</label>
+            <input
+              type="text"
+              value={projectGithubUrl}
+              onChange={(e) => setProjectGithubUrl(e.target.value)}
+              placeholder="예: https://github.com/user/repo"
+              className="project-url-input"
+            />
+          </div>
+          {/* 드롭박스 */}
+          <div
+            ref={dropboxRef}
+            className={`dropbox ${dragOver ? "dragover" : ""} ${
+              loading ? "loading" : ""
+            }`}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragOver(true);
+            }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={(e) => {
+              const url = prompt("URL을 붙여넣으세요 (취소하면 초기화됩니다):");
+              handleDrop(e, url);
+            }}
+          >
+            {loading ? (
+              <>
+                <div className="spinner" />
+                <div>크롤링 중...</div>
+              </>
+            ) : (
+              "URL을 여기에 드래그하세요"
+            )}
+          </div>
         </div>
 
         {/* 아티클 블록들 */}
