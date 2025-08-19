@@ -15,10 +15,5 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  return (
-    <>
-      <Link href="/project-sql-builder">프로젝트 공장</Link>
-      <Link href="/sql-builder">아티클 공장</Link>
-    </>
-  );
+  return <></>;
 }
