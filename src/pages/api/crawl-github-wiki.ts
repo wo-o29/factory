@@ -1,5 +1,6 @@
 // pages/api/crawl-github-wiki.ts
 import puppeteer from "puppeteer";
+import chromium from "@sparticuz/chromium";
 
 export default async function handler(req, res) {
   const { url } = req.query;
@@ -15,17 +16,22 @@ export default async function handler(req, res) {
 
   let browser;
   try {
+    // Vercel/AWS Lambda용 설정
+    const isProduction = process.env.NODE_ENV === "production";
     browser = await puppeteer.launch({
-      // headless: false, // 브라우저 창 열기
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-blink-features=AutomationControlled",
-        "--disable-features=VizDisplayCompositor",
-      ],
-      // devtools: true, // 개발자 도구 자동 열기
+      args: isProduction
+        ? chromium.args
+        : [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-blink-features=AutomationControlled",
+          ],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: isProduction
+        ? await chromium.executablePath()
+        : undefined, // 로컬에서는 기본 Chrome 사용
+      headless: chromium.headless,
     });
-
     const page = await browser.newPage();
     await page.setUserAgent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -35,7 +41,7 @@ export default async function handler(req, res) {
 
     await page.goto(url, {
       waitUntil: "networkidle2",
-      timeout: 15000,
+      timeout: 30000,
     });
 
     // GitHub Wiki 콘텐츠 로드 대기

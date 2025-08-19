@@ -1,20 +1,27 @@
 // pages/api/crawl-notion.ts
 import puppeteer from "puppeteer";
+import chromium from "@sparticuz/chromium";
 
 export default async function handler(req, res) {
   const { url } = req.query;
 
   let browser;
   try {
+    // Vercel/AWS Lambda용 설정
+    const isProduction = process.env.NODE_ENV === "production";
     browser = await puppeteer.launch({
-      // headless: false, // 브라우저 창 열기
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-blink-features=AutomationControlled",
-        "--disable-features=VizDisplayCompositor",
-      ],
-      // devtools: true, // 개발자 도구 자동 열기
+      args: isProduction
+        ? chromium.args
+        : [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-blink-features=AutomationControlled",
+          ],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: isProduction
+        ? await chromium.executablePath()
+        : undefined, // 로컬에서는 기본 Chrome 사용
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
     await page.setUserAgent(
