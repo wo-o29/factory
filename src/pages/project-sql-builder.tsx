@@ -118,7 +118,7 @@ export default function ProjectSqlBuilder() {
       imageUrls,
     } = projectData;
 
-    const authorId = randInt(1, 8);
+    // const authorId = randInt(1, 8);
     const createdAt = randomCreatedAtWithinPastYear();
     const updatedAt = randomUpdatedAfter(createdAt);
     const views = randInt(1, 999);
@@ -128,10 +128,10 @@ export default function ProjectSqlBuilder() {
   '${escapeSQL(summary)}',
   '${escapeSQL(githubUrl)}',
   '${escapeSQL(productionUrl)}',
-  ${authorId},
-  '${formatDateTime(createdAt)}',
-  '${formatDateTime(updatedAt)}',
-  ${views},
+  1,
+  '2025-08-19 00:00:00.000000',
+  '2025-08-19 00:00:00.000000',
+  0,
   '${escapeSQL(description)}'
 );`;
 
@@ -216,17 +216,17 @@ export default function ProjectSqlBuilder() {
     // githubUrl 검사
     if (
       projectData.githubUrl.length < 1 ||
-      projectData.githubUrl.length > 255
+      projectData.githubUrl.length >= 500
     ) {
-      errors.githubUrl = "필수, 1~255자";
+      errors.githubUrl = "필수, 1~500자 이하";
     } else if (!urlRegex.test(projectData.githubUrl)) {
       errors.githubUrl = "URL 형식이 아님";
     }
 
     // productionUrl 검사
     if (projectData.productionUrl) {
-      if (projectData.productionUrl.length > 255) {
-        errors.productionUrl = "1~255자 이하";
+      if (projectData.productionUrl.length >= 500) {
+        errors.productionUrl = "1~500자 이하";
       } else if (!urlRegex.test(projectData.productionUrl)) {
         errors.productionUrl = "URL 형식이 아님";
       }
@@ -238,8 +238,8 @@ export default function ProjectSqlBuilder() {
         errors.imageUrls = "최대 10개까지";
       } else {
         for (const url of urls) {
-          if (url.length < 1 || url.length > 255) {
-            errors.imageUrls = "각 URL은 1~255자";
+          if (url.length < 1 || url.length >= 500) {
+            errors.imageUrls = "각 URL은 1~500자";
             break;
           }
           if (!urlRegex.test(url)) {
@@ -262,6 +262,8 @@ export default function ProjectSqlBuilder() {
 
     return errors;
   }, [projectData]);
+
+  console.log(validateFields);
 
   // 하이라이트 HTML 생성 함수
   const getHighlightHTML = (value: string, fieldName: string): string => {
