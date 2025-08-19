@@ -3,7 +3,7 @@ import Head from "next/head";
 import { TECH_NAME_TO_ID } from "../tech";
 
 // 상수 정의
-const CATEGORY_ID = { trouble: 1, tech: 2, etc: 3 };
+const CATEGORY_ID = { fe: 1, be: 2, android: 3, ios: 4, ss: 5, etc: 6 };
 
 const FIELDS = [
   "title",
