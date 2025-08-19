@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
     await page.goto(url, {
       waitUntil: "networkidle2",
-      timeout: 15000,
+      timeout: 30000,
     });
 
     // 노션 콘텐츠 로드 대기
