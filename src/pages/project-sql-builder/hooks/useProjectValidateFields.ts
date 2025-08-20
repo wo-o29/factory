@@ -1,6 +1,6 @@
 import { TECH_NAME_TO_ID } from "@/tech";
 import { useMemo } from "react";
-import { CATEGORY_ID } from "../ProjectSqlBuilder.page";
+import { CATEGORY_ID } from "..";
 import { parseCSV } from "../../../utils/parseCSV";
 
 // 유효성 검사 함수

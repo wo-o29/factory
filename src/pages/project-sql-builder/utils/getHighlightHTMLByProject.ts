@@ -1,5 +1,5 @@
 import { TECH_NAME_TO_ID } from "@/tech";
-import { CATEGORY_ID } from "../ProjectSqlBuilder.page";
+import { CATEGORY_ID } from "..";
 
 export // 하이라이트 HTML 생성 함수
 const getHighlightHTMLByProject = (
