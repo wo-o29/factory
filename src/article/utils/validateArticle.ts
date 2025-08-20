@@ -2,6 +2,7 @@ import { TECH_NAME_TO_ID } from "@/tech";
 import { parseCSV } from "@/utils/parseCSV";
 import { ArticleData, CATEGORY_KEY } from "../../pages/sql-builder";
 
+const CATEGORY_CHECK = ["fe", "be", "android", "ios"];
 // 유효성 검사 함수
 export const validateArticle = (
   article: ArticleData
@@ -32,7 +33,7 @@ export const validateArticle = (
   if (categoryKey === "etc" && techIds.length !== 0) {
     errors.techStacks = "etc에서는 techStacks 입력 불가";
   } else if (
-    (categoryKey === "trouble" || categoryKey === "tech") &&
+    CATEGORY_CHECK.includes(categoryKey) &&
     (techIds.length < 1 || techIds.length > 3)
   ) {
     errors.techStacks = "1~3개의 스택 필요";

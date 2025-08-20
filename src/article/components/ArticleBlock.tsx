@@ -22,6 +22,8 @@ export default function ArticleBlock({
     });
   };
 
+  const isError = Object.keys(article.errors).length > 0;
+
   return (
     <div className="article-block">
       {/* 폼 그리드 */}
@@ -72,9 +74,11 @@ export default function ArticleBlock({
         <div className="header-flex">
           <h3>📦 Article #{article.id} INSERT문</h3>
           <div style={{ display: "flex", gap: "8px" }}>
-            <button type="button" className="copy-btn" onClick={onClick}>
-              개별 복사
-            </button>
+            {!isError && (
+              <button type="button" className="copy-btn" onClick={onClick}>
+                개별 복사
+              </button>
+            )}
             <button type="button" className="toggle-btn" onClick={onToggle}>
               Toggle
             </button>
