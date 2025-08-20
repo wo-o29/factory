@@ -23,7 +23,7 @@ export default function ArticleBlock({
   };
 
   const isError = Object.keys(article.errors).length > 0;
-
+  console.log(article["techStacks"]);
   return (
     <div className="article-block">
       {/* 폼 그리드 */}
@@ -157,10 +157,10 @@ export default function ArticleBlock({
 
         .hl-wrap textarea {
           position: relative;
-          z-index: 2;
+          z-index: 999;
           background: transparent;
           color: transparent;
-          caret-color: white;
+          caret-color: black;
           resize: none;
         }
 

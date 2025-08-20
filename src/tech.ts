@@ -67,7 +67,6 @@ const TECH_ID = {
   66: "jest",
   67: "reacttestinglibrary",
   68: "storybook",
-  69: "springdatajpa",
   70: "oauth2",
   71: "apachezookeeper",
   72: "restdocs",
