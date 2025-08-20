@@ -1,7 +1,7 @@
+import { PROJECT_CATEGORY_ID } from "@/pages/project-sql-builder";
 import { TECH_NAME_TO_ID } from "@/tech";
+import { parseCSV } from "@/utils/parseCSV";
 import { useMemo } from "react";
-import { PROJECT_CATEGORY_ID } from "..";
-import { parseCSV } from "../../../utils/parseCSV";
 
 // 유효성 검사 함수
 export const useProjectValidateFields = (projectData) => {

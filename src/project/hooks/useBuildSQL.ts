@@ -1,8 +1,8 @@
+import { PROJECT_CATEGORY_ID } from "@/pages/project-sql-builder";
 import { TECH_NAME_TO_ID } from "@/tech";
+import { escapeSQL } from "@/utils/escapeSQL";
+import { parseCSV } from "@/utils/parseCSV";
 import { useMemo } from "react";
-import { escapeSQL } from "../../../utils/escapeSQL";
-import { parseCSV } from "../../../utils/parseCSV";
-import { PROJECT_CATEGORY_ID } from "..";
 
 interface SQLResult {
   projectSQL: string;

@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
-import { getHighlightHTMLByArticle } from "./utils/getHighlightHTMLByArticle";
-import { createNewArticle } from "./utils/createNewArticle";
-import { buildSQL } from "./utils/buildSQL";
-import { validateArticle } from "./utils/validateArticle";
-import ArticleBlock from "./components/ArticleBlock";
+import { getHighlightHTMLByArticle } from "../../article/utils/getHighlightHTMLByArticle";
+import { createNewArticle } from "../../article/utils/createNewArticle";
+import { buildSQL } from "../../article/utils/buildSQL";
+import { validateArticle } from "../../article/utils/validateArticle";
+import ArticleBlock from "../../article/components/ArticleBlock";
 
 // 상수 정의
 export const ARTICLE_CATEGORY_ID = {

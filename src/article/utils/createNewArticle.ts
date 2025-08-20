@@ -1,5 +1,5 @@
 import { TECH_VALUES } from "@/tech";
-import { ArticleData } from "..";
+import { ArticleData } from "../../pages/sql-builder";
 
 const KOREAN_CATEGORY = {
   프론트엔드: "fe",

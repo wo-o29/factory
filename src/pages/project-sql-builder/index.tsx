@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import { useBuildSQL } from "./hooks/useBuildSQL";
-import { useProjectValidateFields } from "./hooks/useProjectValidateFields";
-import { getHighlightHTMLByProject } from "./utils/getHighlightHTMLByProject";
+import { useBuildSQL } from "@/project/hooks/useBuildSQL";
+import { useProjectValidateFields } from "@/project/hooks/useProjectValidateFields";
+import { getHighlightHTMLByProject } from "@/project/utils/getHighlightHTMLByProject";
 
 // 상수 정의
 export const PROJECT_CATEGORY_ID = {

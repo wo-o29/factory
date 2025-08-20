@@ -1,5 +1,5 @@
 import { TECH_NAME_TO_ID } from "@/tech";
-import { ARTICLE_CATEGORY_ID } from "..";
+import { ARTICLE_CATEGORY_ID } from "../../pages/sql-builder";
 
 // 하이라이트 HTML 생성 함수
 export const getHighlightHTMLByArticle = (
