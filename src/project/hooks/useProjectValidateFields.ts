@@ -77,8 +77,8 @@ export const useProjectValidateFields = (projectData) => {
     }
 
     // techStacks 검사
-    if (techIds.length < 1 || techIds.length > 20) {
-      errors.techStacks = "1~20개의 유효한 스택 필요";
+    if (techIds.length < 1) {
+      errors.techStacks = "최소 1개 이상";
     }
 
     // categories 검사

@@ -4,7 +4,7 @@ import { flushSync } from "react-dom";
 export default function TextArea({ value, onChange, ...props }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [height, setHeight] = useState("auto");
-  console.log(height);
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value);
     if (textareaRef.current) {
