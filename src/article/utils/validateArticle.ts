@@ -18,8 +18,8 @@ export const validateArticle = (
   if (article.summary.length < 10 || article.summary.length > 255) {
     errors.summary = "10~255자 필요";
   }
-  if (article.content.length < 100 || article.content.length > 8000) {
-    errors.content = "100~8000자 필요";
+  if (article.content.length < 100) {
+    errors.content = "최소 100자 필요";
   }
   if (article.articleUrl.length < 1 || article.articleUrl.length >= 500) {
     errors.articleUrl = "필수, 1~500자 이하";

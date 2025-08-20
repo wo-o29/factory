@@ -189,7 +189,7 @@ export default async function handler(req, res) {
 
       return {
         title: title.trim(),
-        summary: mainContent.trim().substring(0, 255), // 처음 200자
+        summary: mainContent.trim(),
         content: mainContent.trim(),
         headings,
         links,

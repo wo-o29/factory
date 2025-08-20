@@ -23,17 +23,21 @@ const KOREAN_CATEGORY_KEYS = Object.keys(KOREAN_CATEGORY);
 
 export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
   const allData = jsonData.title + jsonData.content;
-  // console.log("모든 데이터:", allData);
-  const filteredStacks = TECH_VALUES.filter((techStack) => {
-    const regex = new RegExp(`\\b${techStack}\\b`, "i");
-    return regex.test(allData);
-  });
+  const tokens = allData.toLowerCase().split(/\W+/); // 단어 단위 분리
+  console.log(tokens);
+  const filteredStacks = TECH_VALUES.filter((techStack) =>
+    //  const regex = new RegExp(`\\b${techStack}\\b`, "i");
+    // return regex.test(allData);
+    tokens.includes(techStack.toLowerCase())
+  );
   const techStacks = filteredStacks.join(", ");
 
   const filteredCategory = KOREAN_CATEGORY_KEYS.filter((category) => {
-    const regex = new RegExp(`\\b${category}\\b`, "i");
-    return regex.test(allData);
+    // const regex = new RegExp(`\\b${category}\\b`, "i");
+    // return regex.test(allData);
+    return tokens.includes(category.toLowerCase());
   });
+
   const category = filteredCategory
     .map((category) => KOREAN_CATEGORY[category])
     .join(", ");
@@ -41,7 +45,7 @@ export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
   return {
     id: Date.now() + Math.random(),
     title: jsonData?.title || "",
-    summary: jsonData?.summary || "",
+    summary: jsonData?.summary.trim().substring(0, 255) || "",
     articleUrl: url || "",
     category,
     techStacks,

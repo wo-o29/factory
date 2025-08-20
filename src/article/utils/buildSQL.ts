@@ -1,8 +1,11 @@
-import { PROJECT_CATEGORY_ID } from "@/pages/project-sql-builder";
 import { TECH_NAME_TO_ID } from "@/tech";
 import { escapeSQL } from "@/utils/escapeSQL";
 import { parseCSV } from "@/utils/parseCSV";
-import { ArticleData, SQLResult } from "../../pages/sql-builder";
+import {
+  ARTICLE_CATEGORY_ID,
+  ArticleData,
+  SQLResult,
+} from "../../pages/sql-builder";
 import { formatDateTime } from "./formatDateTime";
 
 // SQL 빌드 함수
@@ -21,7 +24,7 @@ export const buildSQL = (
     updatedAt,
     clicks,
   } = article;
-
+  console.log(category);
   const projectIdExpr = projectGithubUrl
     ? `(select id from project where github_url = '${escapeSQL(
         projectGithubUrl
@@ -29,18 +32,19 @@ export const buildSQL = (
     : "/* project github_url 필요 */";
 
   const categoryNames = parseCSV(category).map((s) => s.toLowerCase());
-  const categoryIds = categoryNames
-    .map((n) => PROJECT_CATEGORY_ID[n as keyof typeof PROJECT_CATEGORY_ID])
-    .filter(Boolean);
-  const categoryIdValue = categoryIds.length > 0 ? categoryIds[0] : "''";
   const categoryKey = categoryNames || "";
+  const legendCategory = category
+    .split(", ")
+    .map((c) => ARTICLE_CATEGORY_ID[c])
+    .join(", ");
 
+  console.log(legendCategory);
   const articleSQL = `INSERT INTO article (title, summary, project_id, article_url, category_id, created_at, updated_at, clicks, content) VALUES (
   '${escapeSQL(title)}',
   '${escapeSQL(summary)}',
   ${projectIdExpr},
   '${escapeSQL(articleUrl)}',
-  ${categoryIdValue},
+  ${legendCategory},
   '${formatDateTime(createdAt)}',
   '${formatDateTime(updatedAt)}',
   ${clicks},

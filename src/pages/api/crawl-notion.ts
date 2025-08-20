@@ -94,7 +94,7 @@ export default async function handler(req, res) {
     // API 응답
     return res.status(200).json({
       title: textContent.title,
-      summary: textContent.mainContent.trim().substring(0, 255), // 처음 200자
+      summary: textContent.mainContent.trim(),
       content: textContent.mainContent.trim(),
       debug: {
         totalBlocks: textContent.totalBlocks,
