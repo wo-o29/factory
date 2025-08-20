@@ -1,4 +1,5 @@
 import { ArticleData, FIELDS, SQLResult } from "../../pages/sql-builder";
+import TextArea from "./TextArea";
 
 // 아티클 블록 컴포넌트
 interface ArticleBlockProps {
@@ -46,9 +47,9 @@ export default function ArticleBlock({
                       __html: getHighlightHTML(article[field] as string, field),
                     }}
                   />
-                  <textarea
+                  <TextArea
                     value={article[field] as string}
-                    onChange={(e) => onUpdate(field, e.target.value)}
+                    onChange={(value) => onUpdate(field, value)}
                     className={`${
                       field === "summary" || field === "content"
                         ? field
@@ -161,6 +162,7 @@ export default function ArticleBlock({
           line-height: 1.4;
           z-index: 1;
           pointer-events: none;
+          width: 100%;
         }
 
         .hl-wrap textarea {
@@ -191,7 +193,7 @@ export default function ArticleBlock({
         }
 
         textarea.single {
-          color: black;
+          /* color: black; */
           min-height: 24px;
           max-height: 24px;
           overflow-y: auto;
