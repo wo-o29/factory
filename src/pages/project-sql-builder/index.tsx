@@ -28,6 +28,7 @@ const FIELDS = [
   "description",
   "techStacks",
   "categories",
+  "thumbnailUrls",
   "imageUrls",
   "githubUrl",
   "productionUrl",
@@ -47,6 +48,7 @@ interface ProjectData {
   description: string;
   techStacks: string;
   categories: string;
+  thumbnailUrls: string;
   imageUrls: string;
   githubUrl: string;
   productionUrl: string;
@@ -59,6 +61,7 @@ export default function ProjectSqlBuilder() {
     description: "",
     techStacks: "",
     categories: "",
+    thumbnailUrls: "",
     imageUrls: "",
     githubUrl: "",
     productionUrl: "",

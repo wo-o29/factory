@@ -23,6 +23,7 @@ export const useBuildSQL = (projectData) => {
       productionUrl,
       techStacks,
       categories,
+      thumbnailUrls,
       imageUrls,
     } = projectData;
 
@@ -61,7 +62,7 @@ export const useBuildSQL = (projectData) => {
     }
 
     // urls
-    const urls = parseCSV(imageUrls);
+    const urls = parseCSV(thumbnailUrls + "\n" + imageUrls);
     let urlsSQL = "-- (입력된 imageUrls 없음)";
     if (urls.length > 0) {
       const values = urls.map((u) => `(@pid, '${escapeSQL(u)}')`).join(",\n  ");
