@@ -144,12 +144,28 @@ export default function SqlBuilder() {
     }));
   }, [articles, projectGithubUrl]);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCopyScroll = () => {
+    const element = document.getElementById("copy-all");
+    if (element) {
+      const elementTop =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      const offset = 220; // 상단에서 165px 위로 위치시키기
+      window.scrollTo({
+        top: elementTop - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <Head>
         <title>Articles → SQL Builder</title>
       </Head>
-
       <div className="container">
         <div
           style={{
@@ -170,6 +186,14 @@ export default function SqlBuilder() {
               placeholder="예: https://github.com/user/repo"
               className="project-url-input"
             />
+          </div>
+          <div style={{ display: "flex", justifyContent: "right", gap: "8px" }}>
+            <button type="button" onClick={handleScrollToTop}>
+              TOP
+            </button>
+            <button type="button" onClick={handleCopyScroll}>
+              전체 복사하러 가기
+            </button>
           </div>
           {/* 드롭박스 */}
           <div
@@ -221,7 +245,7 @@ export default function SqlBuilder() {
         <hr />
 
         {/* 통합 INSERT문 */}
-        <h2>
+        <h2 id="copy-all">
           📦 통합 INSERT문 (모든 아티클)
           <span style={{ color: "red" }}> 순서 지켜야함</span>
         </h2>
