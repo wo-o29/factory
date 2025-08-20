@@ -41,7 +41,7 @@ export const getHighlightHTMLByArticle = (
       const hasPartial = Object.keys(dict).some((name) =>
         name.startsWith(lower)
       );
-      console.log(dict);
+
       if (hasPartial) {
         return `<span style="color:deepskyblue">${escapeHTML(token)}</span>`;
       }

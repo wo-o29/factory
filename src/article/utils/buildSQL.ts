@@ -24,7 +24,7 @@ export const buildSQL = (
     updatedAt,
     clicks,
   } = article;
-  console.log(category);
+
   const projectIdExpr = projectGithubUrl
     ? `(select id from project where github_url = '${escapeSQL(
         projectGithubUrl
@@ -38,7 +38,6 @@ export const buildSQL = (
     .map((c) => ARTICLE_CATEGORY_ID[c])
     .join(", ");
 
-  console.log(legendCategory);
   const articleSQL = `INSERT INTO article (title, summary, project_id, article_url, category_id, created_at, updated_at, clicks, content) VALUES (
   '${escapeSQL(title)}',
   '${escapeSQL(summary)}',
