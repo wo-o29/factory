@@ -15,24 +15,36 @@ export default async function handler(req, res) {
   }
 
   let browser;
+  const startTime = Date.now();
   try {
     // Vercel/AWS Lambda용 설정
     const isProduction = process.env.NODE_ENV === "production";
     browser = await puppeteer.launch({
       args: isProduction
-        ? chromium.args
+        ? [...chromium.args, "--disable-dev-shm-usage", "--single-process"]
         : [
             "--no-sandbox",
             "--disable-setuid-sandbox",
             "--disable-blink-features=AutomationControlled",
+            "--disable-dev-shm-usage",
+            "--single-process",
           ],
       defaultViewport: chromium.defaultViewport,
       executablePath: isProduction
         ? await chromium.executablePath()
-        : undefined, // 로컬에서는 기본 Chrome 사용
+        : undefined,
       headless: chromium.headless,
     });
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on("request", (request) => {
+      const blockedResources = ["image", "stylesheet", "font", "media"];
+      if (blockedResources.includes(request.resourceType())) {
+        request.abort();
+      } else {
+        request.continue();
+      }
+    });
     await page.setUserAgent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     );
@@ -203,17 +215,20 @@ export default async function handler(req, res) {
       };
     });
 
-    // 콘솔에 추출 결과 출력
-    console.log("📝 위키 제목:", wikiContent.title);
-    console.log(
-      "📁 저장소:",
-      `${wikiContent.repository.owner}/${wikiContent.repository.repo}`
-    );
-    console.log("📄 페이지명:", wikiContent.repository.pageName);
-    console.log("\n=== 목차 ===");
-    console.log(wikiContent.toc);
-    console.log("\n=== 본문 내용 (처음 500자) ===");
-    console.log(wikiContent.content.substring(0, 500) + "...");
+    const endTime = Date.now(); // 종료 시간 기록
+    console.log(`⏱ 크롤링 소요 시간: ${(endTime - startTime) / 1000}초`);
+
+    // // 콘솔에 추출 결과 출력
+    // console.log("📝 위키 제목:", wikiContent.title);
+    // console.log(
+    //   "📁 저장소:",
+    //   `${wikiContent.repository.owner}/${wikiContent.repository.repo}`
+    // );
+    // console.log("📄 페이지명:", wikiContent.repository.pageName);
+    // console.log("\n=== 목차 ===");
+    // console.log(wikiContent.toc);
+    // console.log("\n=== 본문 내용 (처음 500자) ===");
+    // console.log(wikiContent.content.substring(0, 500) + "...");
 
     // API 응답
     return res.status(200).json({
