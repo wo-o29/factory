@@ -167,18 +167,17 @@ export default function SqlBuilder() {
       return;
     }
 
-    // const diff = allSQL.length - prevLengthRef.current;
-    // prevLengthRef.current = allSQL.length;
+    const entries = Object.entries(articlesWithSQL);
+    const isError = entries.some(
+      ([_, article]) => Object.keys(article.errors).length > 0
+    );
 
-    // if (diff <= 20) {
-    //   // prevLengthRef.current = allSQL.length;
-    //   return;
-    // }
+    if (isError) {
+      return;
+    }
 
     localStorage.setItem("insert", JSON.stringify(allSQL));
     toast.success("INSERT문이 임시 저장되었습니다!");
-
-    // return () => clearInterval(timer);
   }, [allSQL]);
 
   return (
