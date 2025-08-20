@@ -189,10 +189,10 @@ export default function SqlBuilder() {
           </div>
           <div style={{ display: "flex", justifyContent: "right", gap: "8px" }}>
             <button type="button" onClick={handleScrollToTop}>
-              TOP
+              최상단 이동
             </button>
-            <button type="button" onClick={handleCopyScroll}>
-              전체 복사하러 가기
+            <button type="button" onClick={copyAllSQL}>
+              전체 복사
             </button>
           </div>
           {/* 드롭박스 */}

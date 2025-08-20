@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useBuildSQL } from "@/project/hooks/useBuildSQL";
 import { useProjectValidateFields } from "@/project/hooks/useProjectValidateFields";
 import { getHighlightHTMLByProject } from "@/project/utils/getHighlightHTMLByProject";
+import { title } from "process";
 
 // 상수 정의
 export const PROJECT_CATEGORY_ID = {
@@ -31,6 +32,13 @@ const FIELDS = [
   "githubUrl",
   "productionUrl",
 ];
+
+const validationLength = {
+  title: { min: 2, max: 30 },
+  summary: { min: 10, max: 50 },
+  description: { min: 100, max: 8000 },
+  githubUrl: { min: 1, max: 500 },
+};
 
 // 타입 정의
 interface ProjectData {
@@ -140,6 +148,8 @@ export default function ProjectSqlBuilder() {
                   </div>
                 ) : (
                   <textarea
+                    minLength={validationLength[field]?.min}
+                    maxLength={validationLength[field]?.max}
                     id={`field_${field}`}
                     value={projectData[field]}
                     onChange={(e) => updateField(field, e.target.value)}

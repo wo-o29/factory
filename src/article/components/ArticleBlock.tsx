@@ -16,10 +16,16 @@ export default function ArticleBlock({
   onDelete,
   getHighlightHTML,
 }: ArticleBlockProps) {
+  const onClick = () => {
+    navigator.clipboard.writeText(article.sql.combinedSQL).then(() => {
+      alert("개별 INSERT문이 복사되었습니다!");
+    });
+  };
+
   return (
     <div className="article-block">
       {/* 폼 그리드 */}
-      <div className={`grid ${!article.expanded ? "hidden" : ""}`}>
+      <div className={`grid ${article.expanded ? "" : "height"}`}>
         {FIELDS.map((field) => (
           <div key={field} className="row">
             <label>{field}</label>
@@ -66,6 +72,9 @@ export default function ArticleBlock({
         <div className="header-flex">
           <h3>📦 Article #{article.id} INSERT문</h3>
           <div style={{ display: "flex", gap: "8px" }}>
+            <button type="button" className="copy-btn" onClick={onClick}>
+              개별 복사
+            </button>
             <button type="button" className="toggle-btn" onClick={onToggle}>
               Toggle
             </button>
@@ -74,9 +83,11 @@ export default function ArticleBlock({
             </button>
           </div>
         </div>
-        <pre className="sql-combined">{article.sql.combinedSQL}</pre>
+        <pre className={`sql-combined ${article.expanded ? "" : "height"}`}>
+          {article.sql.combinedSQL}
+        </pre>
 
-        <div className={`cols detail ${!article.expanded ? "hidden" : ""}`}>
+        <div className={`cols detail ${article.expanded ? "" : "height"}`}>
           <div>
             <h3>📰 article INSERT</h3>
             <pre className="sql-part">{article.sql.articleSQL}</pre>
@@ -101,6 +112,8 @@ export default function ArticleBlock({
           grid-template-columns: 320px 1fr;
           gap: 16px;
           align-items: start;
+          max-height: 1000px;
+          transition: max-height 0.3s ease;
         }
 
         .row {
@@ -214,6 +227,17 @@ export default function ArticleBlock({
           font-size: 13px;
         }
 
+        .copy-btn {
+          margin-left: auto;
+          padding: 6px 16px;
+          border: none;
+          border-radius: 4px;
+          background: #00cc41;
+          color: white;
+          cursor: pointer;
+          font-size: 13px;
+        }
+
         .sql-combined,
         .sql-part {
           background: #0b1021;
@@ -222,6 +246,7 @@ export default function ArticleBlock({
           overflow: auto;
           border-radius: 6px;
           margin-top: 16px;
+          max-height: 1000px;
         }
 
         .cols {
@@ -233,6 +258,14 @@ export default function ArticleBlock({
 
         .hidden {
           display: none;
+        }
+
+        .height {
+          max-height: 0;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
         }
       `}</style>
     </div>

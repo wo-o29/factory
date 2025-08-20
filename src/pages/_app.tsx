@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Link from "next/link";
+import "@/styles/global.css"; // 전역 스타일
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
