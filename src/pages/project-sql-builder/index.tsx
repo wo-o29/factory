@@ -13,13 +13,13 @@ export const PROJECT_CATEGORY_ID = {
   entertainment: 4,
   travel: 5,
   social: 6,
-  life: 8,
-  finance: 9,
-  sports: 10,
-  ecommerce: 11,
-  etc: 12,
-  web: 13,
-  app: 14,
+  life: 7,
+  finance: 8,
+  sports: 9,
+  ecommerce: 10,
+  etc: 11,
+  web: 12,
+  app: 13,
 };
 
 const FIELDS = [
