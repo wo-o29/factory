@@ -129,6 +129,7 @@ const TECH_ID = {
   131: "css",
   132: "log4j2",
   133: "lighthouse",
+  134: "reactRouter",
 };
 
 export const TECH_NAME_TO_ID = Object.fromEntries(

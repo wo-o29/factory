@@ -118,6 +118,7 @@ export default function SqlBuilder() {
         article.id === id ? { ...article, [field]: value } : article
       )
     );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const deleteArticle = (id: number) => {

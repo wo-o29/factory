@@ -81,8 +81,17 @@ export default function ArticleBlock({
       {/* SQL 패널 */}
       <div className="panel">
         <div className="header-flex">
-          <h3>{article.title}</h3>
-          <div style={{ display: "flex", gap: "8px" }}>
+          <h3 className="overflow" style={{ width: "50%" }}>
+            {article.title}
+          </h3>
+          <div
+            style={{
+              display: "flex",
+              gap: "8px",
+              width: "50%",
+              justifyContent: "right",
+            }}
+          >
             {!isError && (
               <button type="button" className="copy-btn" onClick={onClick}>
                 개별 복사
@@ -220,7 +229,6 @@ export default function ArticleBlock({
         }
 
         .toggle-btn {
-          margin-left: auto;
           padding: 6px 16px;
           border: none;
           border-radius: 4px;
@@ -231,7 +239,6 @@ export default function ArticleBlock({
         }
 
         .delete-btn {
-          margin-left: auto;
           padding: 6px 16px;
           border: none;
           border-radius: 4px;
@@ -242,7 +249,6 @@ export default function ArticleBlock({
         }
 
         .copy-btn {
-          margin-left: auto;
           padding: 6px 16px;
           border: none;
           border-radius: 4px;
@@ -280,6 +286,15 @@ export default function ArticleBlock({
           padding: 0;
           overflow: hidden;
           transition: max-height 0.3s ease;
+        }
+
+        .overflow {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          word-break: break-word;
         }
       `}</style>
     </div>
