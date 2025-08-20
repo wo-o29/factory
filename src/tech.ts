@@ -128,6 +128,7 @@ const TECH_ID = {
   130: "springWebFlux",
   131: "css",
   132: "log4j2",
+  133: "lighthouse",
 };
 
 export const TECH_NAME_TO_ID = Object.fromEntries(
