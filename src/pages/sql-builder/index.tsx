@@ -1,10 +1,11 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
 import { getHighlightHTMLByArticle } from "../../article/utils/getHighlightHTMLByArticle";
 import { createNewArticle } from "../../article/utils/createNewArticle";
 import { buildSQL } from "../../article/utils/buildSQL";
 import { validateArticle } from "../../article/utils/validateArticle";
 import ArticleBlock from "../../article/components/ArticleBlock";
+import { toast } from "react-toastify";
 
 // 상수 정의
 export const ARTICLE_CATEGORY_ID = {
@@ -160,6 +161,18 @@ export default function SqlBuilder() {
       });
     }
   };
+
+  useEffect(() => {
+    if (allSQL.length === 27) {
+      return;
+    }
+    console.log(allSQL);
+
+    localStorage.setItem("insert", JSON.stringify(allSQL));
+    toast.success("INSERT문이 임시 저장되었습니다!");
+
+    // return () => clearInterval(timer);
+  }, [allSQL]);
 
   return (
     <>

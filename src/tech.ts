@@ -125,6 +125,7 @@ const TECH_ID = {
   127: "websocket",
   128: "rabbitmq",
   129: "k6",
+  130: "springWebFlux",
 };
 
 export const TECH_NAME_TO_ID = Object.fromEntries(

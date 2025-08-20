@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import Link from "next/link";
 import "@/styles/global.css"; // 전역 스타일
+import { ToastContainer } from "react-toastify";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,6 +13,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <Link href="/sql-builder">아티클 공장</Link>
       </header>
       <Component {...pageProps} />
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        closeOnClick
+        pauseOnHover={false}
+      />
     </>
   );
 }
