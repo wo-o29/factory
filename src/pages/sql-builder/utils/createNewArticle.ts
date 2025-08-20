@@ -1,24 +1,25 @@
 import { TECH_VALUES } from "@/tech";
 import { ArticleData } from "..";
 
-const KOREAN_CATEGORY_VALUES = [
-  "프론트엔드",
-  "프론트",
-  "frontend",
-  "fe",
-  "백엔드",
-  "backend",
-  "be",
-  "안드로이드",
-  "안드로이드 앱",
-  "android",
-  "ios 앱",
-  "ios",
-  "소프트스킬",
-  "소프트 스킬",
-  "soft skill",
-  "softskill",
-];
+const KOREAN_CATEGORY = {
+  프론트엔드: "fe",
+  프론트: "fe",
+  frontend: "fe",
+  fe: "fe",
+  백엔드: "be",
+  backend: "be",
+  be: "be",
+  안드로이드: "android",
+  "안드로이드 앱": "android",
+  android: "android",
+  "ios 앱": "ios",
+  ios: "ios",
+  소프트스킬: "ss",
+  "소프트 스킬": "ss",
+  "soft skill": "ss",
+  softskill: "ss",
+};
+const KOREAN_CATEGORY_KEYS = Object.keys(KOREAN_CATEGORY);
 
 export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
   const allData = jsonData.title + jsonData.content;
@@ -29,11 +30,13 @@ export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
   });
   const techStacks = filteredStacks.join(", ");
 
-  const filteredCategory = KOREAN_CATEGORY_VALUES.filter((category) => {
+  const filteredCategory = KOREAN_CATEGORY_KEYS.filter((category) => {
     const regex = new RegExp(`\\b${category}\\b`, "i");
     return regex.test(allData);
   });
-  const category = filteredCategory.join(", ");
+  const category = filteredCategory
+    .map((category) => KOREAN_CATEGORY[category])
+    .join(", ");
 
   return {
     id: Date.now() + Math.random(),

@@ -1,6 +1,6 @@
 import { TECH_NAME_TO_ID } from "@/tech";
 import { useMemo } from "react";
-import { CATEGORY_ID } from "..";
+import { PROJECT_CATEGORY_ID } from "..";
 import { parseCSV } from "../../../utils/parseCSV";
 
 // 유효성 검사 함수
@@ -15,7 +15,7 @@ export const useProjectValidateFields = (projectData) => {
       s.toLowerCase()
     );
     const catIds = catNames
-      .map((n) => CATEGORY_ID[n as keyof typeof CATEGORY_ID])
+      .map((n) => PROJECT_CATEGORY_ID[n as keyof typeof PROJECT_CATEGORY_ID])
       .filter(Boolean);
     const urls = parseCSV(projectData.imageUrls);
 

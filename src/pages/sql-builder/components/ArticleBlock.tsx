@@ -152,17 +152,21 @@ export default function ArticleBlock({
           font-family: ui-monospace, Menlo, Consolas, monospace;
           font-size: 13px;
           padding: 8px;
+          color: black;
         }
 
         textarea.summary {
           min-height: 80px;
+          color: black;
         }
 
         textarea.content {
+          color: black;
           min-height: 80px;
         }
 
         textarea.single {
+          color: black;
           min-height: 24px;
           max-height: 24px;
           overflow-y: auto;

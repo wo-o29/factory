@@ -1,5 +1,5 @@
 import { TECH_NAME_TO_ID } from "@/tech";
-import { CATEGORY_ID } from "..";
+import { PROJECT_CATEGORY_ID } from "..";
 
 export // 하이라이트 HTML 생성 함수
 const getHighlightHTMLByProject = (
@@ -10,7 +10,7 @@ const getHighlightHTMLByProject = (
   let dict: Record<string, number> = {};
 
   if (fieldName === "techStacks") dict = TECH_NAME_TO_ID;
-  else if (fieldName === "categories") dict = CATEGORY_ID;
+  else if (fieldName === "categories") dict = PROJECT_CATEGORY_ID;
 
   const counts: Record<string, number> = {};
   tokens.forEach((token) => {

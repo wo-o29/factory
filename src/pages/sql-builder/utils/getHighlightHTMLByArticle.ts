@@ -1,5 +1,5 @@
-import { CATEGORY_ID } from "@/pages/project-sql-builder";
 import { TECH_NAME_TO_ID } from "@/tech";
+import { ARTICLE_CATEGORY_ID } from "..";
 
 // 하이라이트 HTML 생성 함수
 export const getHighlightHTMLByArticle = (
@@ -10,7 +10,7 @@ export const getHighlightHTMLByArticle = (
   let dict: Record<string, number> = {};
 
   if (fieldName === "techStacks") dict = TECH_NAME_TO_ID;
-  else if (fieldName === "category") dict = CATEGORY_ID;
+  else if (fieldName === "category") dict = ARTICLE_CATEGORY_ID;
 
   const counts: Record<string, number> = {};
   tokens.forEach((token) => {
@@ -41,6 +41,7 @@ export const getHighlightHTMLByArticle = (
       const hasPartial = Object.keys(dict).some((name) =>
         name.startsWith(lower)
       );
+      console.log(dict);
       if (hasPartial) {
         return `<span style="color:deepskyblue">${escapeHTML(token)}</span>`;
       }

@@ -1,4 +1,4 @@
-import { CATEGORY_ID } from "@/pages/project-sql-builder";
+import { PROJECT_CATEGORY_ID } from "@/pages/project-sql-builder";
 import { TECH_NAME_TO_ID } from "@/tech";
 import { escapeSQL } from "@/utils/escapeSQL";
 import { parseCSV } from "@/utils/parseCSV";
@@ -30,7 +30,7 @@ export const buildSQL = (
 
   const categoryNames = parseCSV(category).map((s) => s.toLowerCase());
   const categoryIds = categoryNames
-    .map((n) => CATEGORY_ID[n as keyof typeof CATEGORY_ID])
+    .map((n) => PROJECT_CATEGORY_ID[n as keyof typeof PROJECT_CATEGORY_ID])
     .filter(Boolean);
   const categoryIdValue = categoryIds.length > 0 ? categoryIds[0] : "''";
   const categoryKey = categoryNames || "";
@@ -51,7 +51,6 @@ export const buildSQL = (
   const techIds = techNames.map((n) => TECH_NAME_TO_ID[n]).filter(Boolean);
 
   let techSQL = "";
-  console.log(categoryKey);
   if (categoryKey === "etc") {
     techSQL = "";
   } else if (techIds.length > 0) {

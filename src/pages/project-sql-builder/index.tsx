@@ -5,7 +5,7 @@ import { useProjectValidateFields } from "./hooks/useProjectValidateFields";
 import { getHighlightHTMLByProject } from "./utils/getHighlightHTMLByProject";
 
 // 상수 정의
-export const CATEGORY_ID = {
+export const PROJECT_CATEGORY_ID = {
   education: 1,
   it: 2,
   game: 3,

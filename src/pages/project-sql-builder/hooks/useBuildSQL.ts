@@ -2,7 +2,7 @@ import { TECH_NAME_TO_ID } from "@/tech";
 import { useMemo } from "react";
 import { escapeSQL } from "../../../utils/escapeSQL";
 import { parseCSV } from "../../../utils/parseCSV";
-import { CATEGORY_ID } from "..";
+import { PROJECT_CATEGORY_ID } from "..";
 
 interface SQLResult {
   projectSQL: string;
@@ -52,7 +52,7 @@ export const useBuildSQL = (projectData) => {
     // categories
     const catNames = parseCSV(categories).map((s) => s.toLowerCase());
     const catIds = catNames
-      .map((n) => CATEGORY_ID[n as keyof typeof CATEGORY_ID])
+      .map((n) => PROJECT_CATEGORY_ID[n as keyof typeof PROJECT_CATEGORY_ID])
       .filter(Boolean);
     let catSQL = "-- (입력된 categories 없음)";
     if (catIds.length > 0) {

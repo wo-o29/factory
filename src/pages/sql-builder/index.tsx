@@ -7,8 +7,15 @@ import { validateArticle } from "./utils/validateArticle";
 import ArticleBlock from "./components/ArticleBlock";
 
 // 상수 정의
-const CATEGORY_ID = { fe: 1, be: 2, android: 3, ios: 4, ss: 5, etc: 6 };
-export const CATEGORY_KEY = Object.keys(CATEGORY_ID);
+export const ARTICLE_CATEGORY_ID = {
+  fe: 1,
+  be: 2,
+  android: 3,
+  ios: 4,
+  ss: 5,
+  etc: 6,
+};
+export const CATEGORY_KEY = Object.keys(ARTICLE_CATEGORY_ID);
 
 export const FIELDS = [
   "title",
