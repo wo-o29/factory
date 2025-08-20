@@ -80,7 +80,7 @@ export default function ArticleBlock({
       {/* SQL 패널 */}
       <div className="panel">
         <div className="header-flex">
-          <h3>📦 Article #{article.id} INSERT문</h3>
+          <h3>{article.title}</h3>
           <div style={{ display: "flex", gap: "8px" }}>
             {!isError && (
               <button type="button" className="copy-btn" onClick={onClick}>

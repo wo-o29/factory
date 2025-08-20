@@ -62,7 +62,6 @@ export default function SqlBuilder() {
     );
     return ["START TRANSACTION;", ...sqlParts, "COMMIT;"].join("\n\n");
   }, [articles, projectGithubUrl]);
-  const prevLengthRef = useRef(allSQL.length);
 
   // 드래그앤드롭 핸들러
   const handleDrop = async (
