@@ -9,6 +9,13 @@ interface ArticleBlockProps {
   getHighlightHTML: (value: string, fieldName: string) => string;
 }
 
+const validationLength = {
+  title: { min: 2, max: 50 },
+  summary: { min: 10, max: 255 },
+  content: { min: 100, max: 99999999999 },
+  articleUrl: { min: 1, max: 500 },
+};
+
 export default function ArticleBlock({
   article,
   onUpdate,
@@ -23,7 +30,6 @@ export default function ArticleBlock({
   };
 
   const isError = Object.keys(article.errors).length > 0;
-  console.log(article["techStacks"]);
   return (
     <div className="article-block">
       {/* 폼 그리드 */}
@@ -52,6 +58,8 @@ export default function ArticleBlock({
                 </div>
               ) : (
                 <textarea
+                  minLength={validationLength[field]?.min}
+                  maxLength={validationLength[field]?.max}
                   value={article[field] as string}
                   onChange={(e) => onUpdate(field, e.target.value)}
                   className={`${

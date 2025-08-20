@@ -55,6 +55,14 @@ export default function SqlBuilder() {
   const [dragOver, setDragOver] = useState(false);
   const [loading, setLoading] = useState(false);
   const dropboxRef = useRef<HTMLDivElement>(null);
+  // 통합 SQL 생성
+  const allSQL = useMemo(() => {
+    const sqlParts = articles.map(
+      (article) => buildSQL(article, projectGithubUrl).combinedSQL
+    );
+    return ["START TRANSACTION;", ...sqlParts, "COMMIT;"].join("\n\n");
+  }, [articles, projectGithubUrl]);
+  const prevLengthRef = useRef(allSQL.length);
 
   // 드래그앤드롭 핸들러
   const handleDrop = async (
@@ -121,14 +129,6 @@ export default function SqlBuilder() {
     setArticles((prev) => prev.filter((article) => article.id !== id));
   };
 
-  // 통합 SQL 생성
-  const allSQL = useMemo(() => {
-    const sqlParts = articles.map(
-      (article) => buildSQL(article, projectGithubUrl).combinedSQL
-    );
-    return ["START TRANSACTION;", ...sqlParts, "COMMIT;"].join("\n\n");
-  }, [articles, projectGithubUrl]);
-
   // 복사 함수
   const copyAllSQL = () => {
     navigator.clipboard.writeText(allSQL).then(() => {
@@ -149,24 +149,31 @@ export default function SqlBuilder() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleCopyScroll = () => {
-    const element = document.getElementById("copy-all");
-    if (element) {
-      const elementTop =
-        element.getBoundingClientRect().top + window.pageYOffset;
-      const offset = 220; // 상단에서 165px 위로 위치시키기
-      window.scrollTo({
-        top: elementTop - offset,
-        behavior: "smooth",
-      });
-    }
-  };
+  // const handleCopyScroll = () => {
+  //   const element = document.getElementById("copy-all");
+  //   if (element) {
+  //     const elementTop =
+  //       element.getBoundingClientRect().top + window.pageYOffset;
+  //     const offset = 220; // 상단에서 165px 위로 위치시키기
+  //     window.scrollTo({
+  //       top: elementTop - offset,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     if (allSQL.length === 27) {
       return;
     }
-    console.log(allSQL);
+
+    // const diff = allSQL.length - prevLengthRef.current;
+    // prevLengthRef.current = allSQL.length;
+
+    // if (diff <= 20) {
+    //   // prevLengthRef.current = allSQL.length;
+    //   return;
+    // }
 
     localStorage.setItem("insert", JSON.stringify(allSQL));
     toast.success("INSERT문이 임시 저장되었습니다!");
