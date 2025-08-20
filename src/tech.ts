@@ -131,3 +131,5 @@ const TECH_ID = {
 export const TECH_NAME_TO_ID = Object.fromEntries(
   Object.entries(TECH_ID).map(([id, name]) => [name.toLowerCase(), Number(id)])
 );
+
+export const TECH_VALUES = Object.values(TECH_ID);
