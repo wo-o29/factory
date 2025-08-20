@@ -1,4 +1,4 @@
-import { CATEGORY_ID } from "@/pages/project-sql-builder";
+import { CATEGORY_ID } from "@/pages/project-sql-builder/ProjectSqlBuilder.page";
 import { TECH_NAME_TO_ID } from "@/tech";
 
 // 하이라이트 HTML 생성 함수

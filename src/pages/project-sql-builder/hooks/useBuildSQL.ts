@@ -2,7 +2,7 @@ import { TECH_NAME_TO_ID } from "@/tech";
 import { useMemo } from "react";
 import { escapeSQL } from "../../../utils/escapeSQL";
 import { parseCSV } from "../../../utils/parseCSV";
-import { CATEGORY_ID } from "..";
+import { CATEGORY_ID } from "../ProjectSqlBuilder.page";
 
 interface SQLResult {
   projectSQL: string;

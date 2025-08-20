@@ -1,6 +1,6 @@
 import { TECH_NAME_TO_ID } from "@/tech";
 import { parseCSV } from "@/utils/parseCSV";
-import { ArticleData, CATEGORY_KEY } from "..";
+import { ArticleData, CATEGORY_KEY } from "../SqlBuilder.page";
 
 // 유효성 검사 함수
 export const validateArticle = (

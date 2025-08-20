@@ -1,4 +1,4 @@
-import { ArticleData, FIELDS, SQLResult } from "..";
+import { ArticleData, FIELDS, SQLResult } from "../SqlBuilder.page";
 
 // 아티클 블록 컴포넌트
 interface ArticleBlockProps {

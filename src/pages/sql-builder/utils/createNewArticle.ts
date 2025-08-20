@@ -1,5 +1,5 @@
 import { TECH_VALUES } from "@/tech";
-import { ArticleData } from "..";
+import { ArticleData } from "../SqlBuilder.page";
 
 export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
   const allData = jsonData.title + jsonData.content;
