@@ -24,20 +24,38 @@ export default async function handler(req, res) {
       headless: chromium.headless,
     });
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on("request", (req) => {
+      const url = req.url();
+      if (
+        url.includes("analytics") ||
+        url.includes("tracking") ||
+        url.includes("ads")
+      ) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
+
     await page.setUserAgent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     );
 
     console.log("🚀 페이지 로딩 중:", url);
 
+    // await page.goto(url, {
+    //   waitUntil: "networkidle2",
+    //   timeout: 30000,
+    // });
     await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 30000,
+      waitUntil: "domcontentloaded",
+      timeout: 20000,
     });
 
     // 노션 콘텐츠 로드 대기
     try {
-      await page.waitForSelector("[data-block-id]", { timeout: 10000 });
+      await page.waitForSelector("[data-block-id]", { timeout: 5000 });
     } catch (e) {
       console.log("⚠️ 노션 블록을 찾을 수 없음");
     }
@@ -110,7 +128,7 @@ export default async function handler(req, res) {
   } finally {
     if (browser) {
       console.log("🔄 브라우저 종료");
-      // await browser.close();
+      await browser.close();
     }
   }
 }

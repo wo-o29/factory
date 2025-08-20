@@ -51,16 +51,20 @@ export default async function handler(req, res) {
 
     console.log("🚀 GitHub Wiki 페이지 로딩 중:", url);
 
+    // await page.goto(url, {
+    //   waitUntil: "networkidle2",
+    //   timeout: 30000,
+    // });
     await page.goto(url, {
-      waitUntil: "networkidle2",
-      timeout: 30000,
+      waitUntil: "domcontentloaded",
+      timeout: 20000,
     });
 
     // GitHub Wiki 콘텐츠 로드 대기
     try {
       await page.waitForSelector(
         ".markdown-body, #wiki-content, .wiki-wrapper",
-        { timeout: 10000 }
+        { timeout: 5000 }
       );
     } catch (e) {
       console.log("⚠️ GitHub Wiki 콘텐츠를 찾을 수 없음");
