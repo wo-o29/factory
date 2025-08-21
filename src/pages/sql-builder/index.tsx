@@ -104,6 +104,7 @@ export default function SqlBuilder() {
       const jsonData = await response.json();
       const newArticle = createNewArticle(url, jsonData);
       setArticles((prev) => [newArticle, ...prev]);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       alert("크롤링 실패: " + error);
     } finally {
@@ -118,7 +119,6 @@ export default function SqlBuilder() {
         article.id === id ? { ...article, [field]: value } : article
       )
     );
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const deleteArticle = (id: number) => {
