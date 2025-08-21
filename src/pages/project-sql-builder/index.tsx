@@ -73,6 +73,12 @@ export default function ProjectSqlBuilder() {
     setProjectData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const copyAllSQL = () => {
+    navigator.clipboard.writeText(buildSQL.combinedSQL).then(() => {
+      alert("통합 INSERT문이 복사되었습니다!");
+    });
+  };
+
   return (
     <>
       <Head>
@@ -80,6 +86,21 @@ export default function ProjectSqlBuilder() {
       </Head>
 
       <div className="container">
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            background: "white",
+            padding: "16px",
+            display: "flex",
+            justifyContent: "right",
+          }}
+        >
+          <button type="button" onClick={copyAllSQL}>
+            전체 복사
+          </button>
+        </div>
         {/* INSERT문 패널 */}
         <div className="panel">
           <h3>📦 통합 INSERT문</h3>
