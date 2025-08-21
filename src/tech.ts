@@ -131,6 +131,7 @@ const TECH_ID = {
   133: "lighthouse",
   134: "reactRouter",
   135: "locust",
+  136: "sentry",
 };
 
 export const TECH_NAME_TO_ID = Object.fromEntries(
