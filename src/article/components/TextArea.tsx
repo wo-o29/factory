@@ -37,6 +37,7 @@ export default function TextArea({ value, onChange, ...props }) {
         lineHeight: 1.4,
         fontSize: 13,
         color: "transparent",
+        caretColor: "black",
       }} // 재조정 위한 스타일
     />
   );

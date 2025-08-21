@@ -97,7 +97,7 @@ const TECH_ID = {
   99: "jackson",
   // 추가된 안드로이드 관련 기술스택
   101: "retrofit",
-  102: "okhttp",
+  // 102: "okhttp",
   103: "moshi",
   104: "coroutines",
   105: "flow",
