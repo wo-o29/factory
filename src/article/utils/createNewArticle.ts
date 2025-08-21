@@ -50,8 +50,8 @@ export const createNewArticle = (url?: string, jsonData?: any): ArticleData => {
     category,
     techStacks,
     content: jsonData?.content || "",
-    createdAt: new Date("2025-08-20T00:00:00.000Z"),
-    updatedAt: new Date("2025-08-20T00:00:00.000Z"),
+    createdAt: new Date("2025-08-19T00:00:00.000Z"),
+    updatedAt: new Date("2025-08-19T00:00:00.000Z"),
     clicks: 0,
     expanded: true,
   };

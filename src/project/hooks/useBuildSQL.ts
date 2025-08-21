@@ -33,8 +33,8 @@ export const useBuildSQL = (projectData) => {
     '${escapeSQL(githubUrl)}',
     '${escapeSQL(productionUrl)}',
     1,
-    '2025-08-20 00:00:00.000000',
-    '2025-08-20 00:00:00.000000',
+    '2025-08-19 00:00:00.000000',
+    '2025-08-19 00:00:00.000000',
     0,
     '${escapeSQL(description)}'
   );`;
