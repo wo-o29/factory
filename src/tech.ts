@@ -136,6 +136,7 @@ const TECH_ID = {
   139: "locationManager",
   140: "fusedLocationProviderClient",
   141: "serialization",
+  142: "recyclerView",
 };
 1;
 
