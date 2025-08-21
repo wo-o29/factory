@@ -133,6 +133,8 @@ const TECH_ID = {
   135: "locust",
   136: "sentry",
   137: "googleAnalytics",
+  139: "locationManager",
+  140: "fusedLocationProviderClient",
 };
 1;
 
