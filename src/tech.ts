@@ -132,7 +132,9 @@ const TECH_ID = {
   134: "reactRouter",
   135: "locust",
   136: "sentry",
+  137: "googleAnalytics",
 };
+1;
 
 export const TECH_NAME_TO_ID = Object.fromEntries(
   Object.entries(TECH_ID).map(([id, name]) => [name.toLowerCase(), Number(id)])
