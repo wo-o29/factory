@@ -135,6 +135,7 @@ const TECH_ID = {
   137: "googleAnalytics",
   139: "locationManager",
   140: "fusedLocationProviderClient",
+  141: "serialization",
 };
 1;
 
